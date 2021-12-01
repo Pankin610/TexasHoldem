@@ -93,7 +93,7 @@ public class Player{
 
     public int MakeBet(int min_bet) {
         System.out.println();
-        System.out.println(name + ", you have to bet at least " + min_bet + " coins to " +( min_bet + getRound_bet()) + " coins");
+        System.out.println(name + ", you have to bet at least " + min_bet + " (" + (min_bet + getRound_bet()) + " in pot)");
         System.out.println("Your budget: " +  Coins());
         if (Coins() < min_bet) {
             System.out.println("Unfortunately you have not enough money, the system has passed for you");
@@ -118,11 +118,15 @@ public class Player{
                 return AllIn();
             } else {
                 int bet = Integer.parseInt(input);
-                if (bet <= Coins()) {
+                if (bet <= Coins() && bet >= min_bet) {
                     Bet(bet);
                     return bet;
-                } else {
+                } else if (bet > Coins()){
                     System.out.println(":) You're poor man! - maybe next time, try again!");
+                    input = scanner.nextLine();
+                } else {
+                    System.out.println("AT LEAST " + min_bet);
+                    input = scanner.nextLine();
                 }
             }
         }
