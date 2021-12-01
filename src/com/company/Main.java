@@ -71,6 +71,12 @@ public class Main {
         pot = 0;
     }
 
+    public static void AfterCards(Scanner scanner) {
+        System.out.println("Enter any key...");
+        scanner.nextLine();
+        System.out.println();
+    }
+
     public static void main(String[] args) throws InterruptedException, IOException {
 	    System.out.println("Welcome to Texas Hold'em Game");
         System.out.println();
@@ -95,9 +101,9 @@ public class Main {
 
         while (InGame()) {
             SetPlayersCards();
-            Betting(); SetNewCard(); SetNewCard(); SetNewCard(); PrintTable();
-            Betting(); SetNewCard(); PrintTable();
-            Betting(); SetNewCard(); PrintTable();
+            Betting(); SetNewCard(); SetNewCard(); SetNewCard(); PrintTable(); AfterCards(scanner);
+            Betting(); SetNewCard(); PrintTable(); AfterCards(scanner);
+            Betting(); SetNewCard(); PrintTable(); AfterCards(scanner);
             Betting();
             GiveMoney();
         }
