@@ -22,7 +22,9 @@ enum Name {
     QUEEN(12),
     KING(13),
     ACE(14);
-
+    // najsilniejsza karta karta [2; 14]
+    // para 15
+    // (2, 2) < (A, A),    (8, 8, 8, 2, 3, A, K) > (2, 2, 4, 4, A, K, J)
     int value;
     Name(int x) {
         value = x;
