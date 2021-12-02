@@ -45,6 +45,7 @@ public class Main {
                         total_bet = Math.max(total_bet, player1.getRound_bet());
                     }
                     pot += player.MakeBet(total_bet - player.getRound_bet());
+                    clearConsole();
                 }
             }
             HashSet<Integer> counter = new HashSet<Integer>();
@@ -91,12 +92,31 @@ public class Main {
         }
 
         pot = 0;
+        for (Player player : array_of_players) {
+            player.setRound_bet(0);
+        }
+        table.clear();
     }
 
     public static void AfterCards(Scanner scanner) {
         System.out.println("Enter any key...");
         scanner.nextLine();
         System.out.println();
+    }
+
+    public static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            }
+            else {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e) {
+            //  Handle any exceptions.
+        }
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -123,7 +143,9 @@ public class Main {
 
         while (InGame()) {
             SetPlayersCards();
+            clearConsole();
             Betting(); SetNewCard(); SetNewCard(); SetNewCard(); PrintTable(); AfterCards(scanner);
+            clearConsole();
             Betting(); SetNewCard(); PrintTable(); AfterCards(scanner);
             Betting(); SetNewCard(); PrintTable(); AfterCards(scanner);
             Betting();
