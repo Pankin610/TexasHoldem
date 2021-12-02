@@ -90,6 +90,13 @@ public class Main {
             }            
         }
 
+        System.out.println("The round has ended! Here are the winners:");
+        for (Player player : winners) {
+            System.out.print(player.Name() + " ");
+        }
+        System.out.println("");
+        System.out.println("Each wins " + pot / winners.size() + " coins.");
+ 
         for (Player player : winners) {
             player.Win(pot / winners.size());
         }
