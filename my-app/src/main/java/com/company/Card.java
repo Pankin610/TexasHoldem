@@ -5,29 +5,39 @@ import java.util.Collections;
 import java.util.Stack;
 
 enum Suit {
-    CLUBS, DIAMONDS, HEARTS, SPADES
+    CLUBS("Clubs"),
+    DIAMONDS("Diamonds"),
+    HEARTS("Hearts"),
+    SPADES("Spades");
+
+    String text;
+    Suit(String text) {
+        this.text = text;
+    }
 }
 
 enum Name {
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5),
-    SIX(6),
-    SEVEN(7),
-    EIGHT(8),
-    NINE(9),
-    TEN(10),
-    JACK(11),
-    QUEEN(12),
-    KING(13),
-    ACE(14);
+    TWO(2, "two"),
+    THREE(3, "three"),
+    FOUR(4, "four"),
+    FIVE(5, "five"),
+    SIX(6, "six"),
+    SEVEN(7, "seven"),
+    EIGHT(8, "eight"),
+    NINE(9, "nine"),
+    TEN(10, "ten"),
+    JACK(11, "Jack"),
+    QUEEN(12, "Queen"),
+    KING(13, "King"),
+    ACE(14, "Ace");
     // najsilniejsza karta karta [2; 14]
     // para 15
     // (2, 2) < (A, A),    (8, 8, 8, 2, 3, A, K) > (2, 2, 4, 4, A, K, J)
     int value;
-    Name(int x) {
+    String text;
+    Name(int x, String text) {
         value = x;
+        this.text = text;
     }
 }
 
@@ -87,4 +97,9 @@ public class Card {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return suit.text + " " + name.text;
+    } 
 }
