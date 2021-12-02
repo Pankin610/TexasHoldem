@@ -77,7 +77,7 @@ public class Main {
         }
     }
 
-    public static void Betting() {
+    public static void Betting(boolean flop) {
         boolean[] made_move = new boolean[array_of_players.size()];
         int index = 0;
         boolean same_bet = false;
@@ -86,26 +86,28 @@ public class Main {
         while (!same_bet) {
             for (Player player : array_of_players) {
                 //small and big blinds
-                if (num_of_player == 1) {
-                    if (player.Coins() >= 10) {
-                        player.Bet(10);
-                        pot += 10;
-                    } else {
-                        player.Pass();
+                if (flop) {
+                    if (num_of_player == 1) {
+                        if (player.Coins() >= 10) {
+                            player.Bet(10);
+                            pot += 10;
+                        } else {
+                            player.Pass();
+                        }
+                        index++;
+                        num_of_player++;
+                        continue;
+                    } else if (num_of_player == 2) {
+                        if (player.Coins() >= 20) {
+                            player.Bet(20);
+                            pot += 20;
+                        } else {
+                            player.Pass();
+                        }
+                        index++;
+                        num_of_player++;
+                        continue;
                     }
-                    index++;
-                    num_of_player++;
-                    continue;
-                } else if (num_of_player == 2) {
-                    if (player.Coins() >= 20) {
-                        player.Bet(20);
-                        pot += 20;
-                    } else {
-                        player.Pass();
-                    }
-                    index++;
-                    num_of_player++;
-                    continue;
                 }
 
 
@@ -222,7 +224,7 @@ public class Main {
     }
 
     public static void WaitForEnter(Scanner scanner) {
-        System.out.println("Enter any key...");
+        System.out.println("Press Enter...");
         scanner.nextLine();
         System.out.println();
     }
@@ -284,7 +286,7 @@ public class Main {
 
         while (array_of_players.size() > 1) {
             SetPlayersCards();
-            Betting(); EmptyScreen();
+            Betting(true); EmptyScreen();
             if (EnoughPlayers()) {
                 SetNewCard(); SetNewCard(); SetNewCard(); WaitForEnter(scanner);
             } else {
@@ -295,7 +297,7 @@ public class Main {
                 MovePlayersAroundTable();
                 continue;
             }
-            Betting(); EmptyScreen();
+            Betting(false); EmptyScreen();
             if (EnoughPlayers()) {
                 SetNewCard(); WaitForEnter(scanner);
             } else {
@@ -306,7 +308,7 @@ public class Main {
                 MovePlayersAroundTable();
                 continue;
             }
-            Betting(); EmptyScreen();
+            Betting(false); EmptyScreen();
             if (EnoughPlayers()) {
                 SetNewCard(); WaitForEnter(scanner);
             } else {
@@ -317,7 +319,7 @@ public class Main {
                 MovePlayersAroundTable();
                 continue;
             }
-            Betting(); EmptyScreen();
+            Betting(false); EmptyScreen();
             GiveMoney();
             WaitForEnter(scanner);
             MovePlayersAroundTable();
