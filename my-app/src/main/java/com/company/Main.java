@@ -39,13 +39,15 @@ public class Main {
         boolean same_bet = false;
         while (!same_bet) {
             for (Player player : array_of_players) {
+                clearConsole();
                 if (!player.IsPass() && player.InGame()) {
+                    // print Table
+                    // print your cards
                     int total_bet = 0;
                     for (Player player1 : array_of_players) {
                         total_bet = Math.max(total_bet, player1.getRound_bet());
                     }
                     pot += player.MakeBet(total_bet - player.getRound_bet());
-                    clearConsole();
                 }
             }
             HashSet<Integer> counter = new HashSet<Integer>();
@@ -105,6 +107,7 @@ public class Main {
     }
 
     public static void clearConsole() {
+        System.out.println("Cos poszlo nie tak");
         try {
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
@@ -115,7 +118,7 @@ public class Main {
             }
         }
         catch (final Exception e) {
-            //  Handle any exceptions.
+            System.out.println("Cos poszlo nie tak");
         }
     }
 

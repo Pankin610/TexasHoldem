@@ -97,6 +97,7 @@ public class Player{
 
     public int MakeBet(int min_bet) {
         System.out.println();
+        // print your cards
         System.out.println(name + ", you have to bet at least " + min_bet + " (" + (min_bet + getRound_bet()) + " in pot)");
         System.out.println("Your budget: " +  Coins());
         if (Coins() < min_bet) {
