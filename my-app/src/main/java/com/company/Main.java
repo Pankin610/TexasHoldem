@@ -51,6 +51,32 @@ public class Main {
         }
     }
 
+    public static void PrintCombination(Player player) {
+        ArrayList<Card> player_cards = (ArrayList<Card>)table.clone();
+        player_cards.add(player.FCard());
+        player_cards.add(player.SCard());
+        int best_comb = Combination.getBestCombination(player_cards);
+        if (best_comb < 1000000) {
+            System.out.println("High card");
+        } else if (best_comb < 2000000) {
+            System.out.println("One pair");
+        } else if (best_comb < 3000000) {
+            System.out.println("Two pair");
+        }  else if (best_comb < 4000000) {
+            System.out.println("Three of a kind");
+        }  else if (best_comb < 5000000) {
+            System.out.println("Straight");
+        }  else if (best_comb < 6000000) {
+            System.out.println("Flush");
+        }  else if (best_comb < 7000000) {
+            System.out.println("Full hose");
+        }  else if (best_comb < 8000000) {
+            System.out.println("Four of a kind");
+        }  else  {
+            System.out.println("Straight flush");
+        }
+    }
+
     public static void Betting() {
         boolean[] made_move = new boolean[array_of_players.size()];
         int index = 0;
@@ -90,6 +116,11 @@ public class Main {
                     WaitForEnter(scanner);
                     EmptyScreen();
                     PrintPlayerMoves(made_move, player);
+
+                    System.out.println();
+                    System.out.print("Your combination: ");
+                    PrintCombination(player);
+
                     if (!table.isEmpty()) {
                         PrintTable();
                     }
@@ -144,7 +175,7 @@ public class Main {
         ArrayList<Player> winners = new ArrayList<>();
         int cur_max_comb = 0;
         for (Player player : array_of_players) {
-            if (player.IsPass() || player.getRound_bet() == 0) {
+            if (player.IsPass()) {
                 continue;
             }
             ArrayList<Card> player_cards = (ArrayList<Card>)table.clone();
@@ -180,6 +211,7 @@ public class Main {
         for (Player player : winners) {
             System.out.print(player.Name() + ": ");
             player.PrintHand();
+            PrintCombination(player);
         }
 
         pot = 0;
@@ -198,7 +230,7 @@ public class Main {
     public static boolean EnoughPlayers() {
         int counter = 0;
         for (Player player : array_of_players) {
-            counter += (!player.IsPass()) ? 1 : 0;
+            counter += (!player.IsPass() && player.InGame()) ? 1 : 0;
         }
         return counter > 1;
     }

@@ -117,7 +117,6 @@ public class Player{
         if (Coins() < min_bet) {
             System.out.println("Unfortunately you have not enough money, the system has passed for you");
             Pass();
-            return 0;
         }
         System.out.println("What's your move?");
         if (Coins() > min_bet) {
@@ -130,6 +129,9 @@ public class Player{
         }
         System.out.println();
         Scanner scanner = new Scanner(System.in);
+        if (IsPass()) {
+            return 0;
+        }
         String input = scanner.nextLine();
         while (true) {
             if (input.isEmpty()) {

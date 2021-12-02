@@ -2,11 +2,7 @@ package com.company;
 
 import com.company.Card;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Arrays;
-import java.util.List;
-import java.util.BitSet;
+import java.util.*;
 
 public class Combination {
     BitSet cards_mask;
@@ -41,26 +37,279 @@ public class Combination {
     static {
         // adding all combinations in the increasing order of strength
 
-        // string card
+        // strong card
         for (Card card : Card.allCards) {
             addCombination(Arrays.asList(card));
         }
         // pair
-        for (Card card : Card.allCards) {
-            addCombination(Arrays.asList(card, card));
-        }
-        // two pairs
+//        for (Card card : Card.allCards) {
+//            addCombination(Arrays.asList(card, card));
+//        }
+        max_val = 1000000;
         for (Card card1 : Card.allCards) {
             for (Card card2 : Card.allCards) {
-                if (card1.equals(card2)) {
+                if (card2.name.value < card1.name.value) {
                     continue;
                 }
-                addCombination(Arrays.asList(card1, card1, card2, card2));
+                if (card1.name.equals(card2.name) && !card1.equals(card2)) {
+                    addCombination(Arrays.asList(card1, card2));
+                }
             }
         }
+        // two pair
+//        for (Card card1 : Card.allCards) {
+//            for (Card card2 : Card.allCards) {
+//                if (card1.equals(card2)) {
+//                    continue;
+//                }
+//                addCombination(Arrays.asList(card1, card1, card2, card2));
+//            }
+//        }
+        max_val = 2000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        if (!card1.equals(card2) && card1.name.equals(card2.name)) {
+                            if (!card3.equals(card4) && card3.name.equals(card4.name)) {
+                                if (!card1.name.equals(card3.name)) {
+                                    addCombination(Arrays.asList(card1, card2, card3, card4));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // three of kind
+        max_val = 3000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    if (card1.name.equals(card2.name) && card2.name.equals(card3.name)) {
+                        if (!card1.equals(card2) && !card1.equals(card3) && !card2.equals(card3)) {
+                            addCombination(Arrays.asList(card1, card2, card3));
+                        }
+                    }
+                }
+            }
+        }
+        // street
+        max_val = 4000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        for (Card card5 : Card.allCards) {
+                            if (card5.name.value < card4.name.value) {
+                                continue;
+                            }
+                            if (card1.name.value + 1 == card2.name.value) {
+                                if (card2.name.value + 1 == card3.name.value) {
+                                    if (card3.name.value + 1 == card4.name.value) {
+                                        if (card4.name.value + 1 == card5.name.value) {
+                                            HashSet<Suit> suitesss = new HashSet<>();
+                                            suitesss.add(card1.suit);
+                                            suitesss.add(card2.suit);
+                                            suitesss.add(card3.suit);
+                                            suitesss.add(card4.suit);
+                                            suitesss.add(card5.suit);
+                                            if (suitesss.size() > 1) {
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // flush - kolor
+        max_val = 5000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        for (Card card5 : Card.allCards) {
+                            if (card5.name.value < card4.name.value) {
+                                continue;
+                            }
+                            HashSet<Card> sett = new HashSet<>();
+                            sett.add(card1);
+                            sett.add(card2);
+                            sett.add(card3);
+                            sett.add(card4);
+                            sett.add(card5);
 
-        
+                            HashSet<Suit> suiteess = new HashSet<>();
+                            suiteess.add(card1.suit);
+                            suiteess.add(card2.suit);
+                            suiteess.add(card3.suit);
+                            suiteess.add(card4.suit);
+                            suiteess.add(card5.suit);
 
+                            if (sett.size() == 5 && suiteess.size() == 5) {
+                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // full house
+        max_val = 6000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        for (Card card5 : Card.allCards) {
+                            if (card5.name.value < card4.name.value) {
+                                continue;
+                            }
+                            HashSet<Card> sett = new HashSet<>();
+                            sett.add(card1);
+                            sett.add(card2);
+                            sett.add(card3);
+                            sett.add(card4);
+                            sett.add(card5);
+
+                            if (sett.size() < 5) {
+                                continue;
+                            }
+
+                            if (card1.name.equals(card2.name) && card2.name.equals(card3.name)) {
+                                if (card4.name.equals(card5.name)) {
+                                    Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // four of kind
+        max_val = 7000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        HashSet<Card> sett = new HashSet<>();
+                        sett.add(card1);
+                        sett.add(card2);
+                        sett.add(card3);
+                        sett.add(card4);
+
+                        if (sett.size() < 4) {
+                            continue;
+                        }
+
+                        HashSet<String> strings = new HashSet<>();
+                        strings.add(card1.name.text);
+                        strings.add(card2.name.text);
+                        strings.add(card3.name.text);
+                        strings.add(card4.name.text);
+
+                        if (strings.size() == 1) {
+                            Combination.addCombination(Arrays.asList(card1, card2, card3, card4));
+                        }
+                    }
+                }
+            }
+        }
+        // poker
+        max_val = 8000000;
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card2.name.value < card1.name.value) {
+                    continue;
+                }
+                for (Card card3 : Card.allCards) {
+                    if (card3.name.value < card2.name.value) {
+                        continue;
+                    }
+                    for (Card card4 : Card.allCards) {
+                        if (card4.name.value < card3.name.value) {
+                            continue;
+                        }
+                        for (Card card5 : Card.allCards) {
+                            if (card5.name.value < card4.name.value) {
+                                continue;
+                            }
+                            if (card1.name.value + 1 == card2.name.value) {
+                                if (card2.name.value + 1 == card3.name.value) {
+                                    if (card3.name.value + 1 == card4.name.value) {
+                                        if (card4.name.value + 1 == card5.name.value) {
+                                            HashSet<Suit> suitesss = new HashSet<>();
+                                            suitesss.add(card1.suit);
+                                            suitesss.add(card2.suit);
+                                            suitesss.add(card3.suit);
+                                            suitesss.add(card4.suit);
+                                            suitesss.add(card5.suit);
+                                            if (suitesss.size() == 1) {
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         // threes of the same value
         /*Map<Name, Card[]> cards_by_name = Card.allCards.stream().
             collect(Collectors.groupingBy(
@@ -70,7 +319,7 @@ public class Combination {
 
     public static int getBestCombination(Collection<Card> cards) {
         BitSet st = getCardsBitset(cards);
-        int max_val = 1;
+        int max_val = 0;
         for (Combination comb : allCombinations) {
             if (!comb.isSubSet(st)) {
                 continue;
