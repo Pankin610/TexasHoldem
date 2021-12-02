@@ -34,18 +34,26 @@ enum Name {
 public class Card {
     Suit suit;
     Name name;
+    int index;
 
-    private Card(Suit suit, Name name) {
+    private Card(Suit suit, Name name, int index) {
         this.suit = suit;
         this.name = name;
+        this.index = index;
+    }
+
+    public int index() {
+        return index;
     }
 
     static public ArrayList<Card> allCards = new ArrayList<>();
 
     static {
+        int ind = 0;
         for (Suit suit : Suit.values()) {
             for (Name name : Name.values()) {
-                allCards.add(new Card(suit, name));
+                allCards.add(new Card(suit, name, ind));
+                ind++;
             }
         }
     }
@@ -62,5 +70,13 @@ public class Card {
 
     public int compareByValue(Card other) {
         return Integer.compare(name.value, other.name.value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Card) {
+            return ((Card)o).name.equals(name) && ((Card)o).suit.equals(suit);
+        }
+        return false;
     }
 }
