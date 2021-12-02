@@ -39,12 +39,33 @@ public class Combination {
     }
 
     static {
+        // adding all combinations in the increasing order of strength
+
+        // string card
         for (Card card : Card.allCards) {
             addCombination(Arrays.asList(card));
         }
+        // pair
         for (Card card : Card.allCards) {
             addCombination(Arrays.asList(card, card));
         }
+        // two pairs
+        for (Card card1 : Card.allCards) {
+            for (Card card2 : Card.allCards) {
+                if (card1.equals(card2)) {
+                    continue;
+                }
+                addCombination(Arrays.asList(card1, card1, card2, card2));
+            }
+        }
+
+        
+
+        // threes of the same value
+        /*Map<Name, Card[]> cards_by_name = Card.allCards.stream().
+            collect(Collectors.groupingBy(
+                card Card.getName(), Collectors.toArray()
+            ));*/
     }
 
     public static int getBestCombination(Collection<Card> cards) {

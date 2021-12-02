@@ -75,6 +75,9 @@ public class Main {
         ArrayList<Player> winners = new ArrayList<>();
         int cur_max_comb = 0;
         for (Player player : array_of_players) {
+            if (player.IsPass() || player.getRound_bet() == 0) {
+                continue;
+            }
             ArrayList<Card> player_cards = (ArrayList<Card>)table.clone();
             player_cards.add(player.FCard());
             player_cards.add(player.SCard());
