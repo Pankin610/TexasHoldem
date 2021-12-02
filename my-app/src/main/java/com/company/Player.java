@@ -21,6 +21,10 @@ public class Player{
         first = card;
     }
 
+    public void setRound_bet(int x) {
+        round_bet = x;
+    }
+
     public void SetSecondCard(Card card) {
         second = card;
     }
