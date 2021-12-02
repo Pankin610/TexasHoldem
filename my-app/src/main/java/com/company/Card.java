@@ -46,6 +46,14 @@ public class Card {
         return index;
     }
 
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
     static public ArrayList<Card> allCards = new ArrayList<>();
 
     static {
