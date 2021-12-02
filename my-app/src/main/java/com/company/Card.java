@@ -100,6 +100,128 @@ public class Card {
 
     @Override
     public String toString() {
-        return suit.text + " " + name.text;
+        switch (suit.text) {
+            case "Clubs":
+                switch (name.text) {
+                    case "King":
+                        return "\uD83C\uDCDE";
+                    case "Queen":
+                        return "\uD83C\uDCDD";
+                    case "Jack":
+                        return "\uD83C\uDCDB";
+                    case "ten":
+                        return "\uD83C\uDCDA";
+                    case "nine":
+                        return "\uD83C\uDCD9";
+                    case "eight":
+                        return "\uD83C\uDCD8";
+                    case "seven":
+                        return "\uD83C\uDCD7";
+                    case "six":
+                        return "\uD83C\uDCD6";
+                    case "five":
+                        return "\uD83C\uDCD5";
+                    case "four":
+                        return "\uD83C\uDCD4";
+                    case "three":
+                        return "\uD83C\uDCD3";
+                    case "two":
+                        return "\uD83C\uDCD2";
+                    case "Ace":
+                        return "\uD83C\uDCD1";
+                }
+                break;
+            case "Hearts":
+                switch (name.text) {
+                    case "King":
+                        return "\uD83C\uDCBE";
+                    case "Queen":
+                        return "\uD83C\uDCBD";
+                    case "Jack":
+                        return "\uD83C\uDCBB";
+                    case "ten":
+                        return "\uD83C\uDCBA";
+                    case "nine":
+                        return "\uD83C\uDCB9";
+                    case "eight":
+                        return "\uD83C\uDCB8";
+                    case "seven":
+                        return "\uD83C\uDCB7";
+                    case "six":
+                        return "\uD83C\uDCB6";
+                    case "five":
+                        return "\uD83C\uDCB5";
+                    case "four":
+                        return "\uD83C\uDCB4";
+                    case "three":
+                        return "\uD83C\uDCB3";
+                    case "two":
+                        return "\uD83C\uDCB2";
+                    case "Ace":
+                        return "\uD83C\uDCB1";
+                }
+                break;
+            case "Spades":
+                switch (name.text) {
+                    case "King":
+                        return "\uD83C\uDCAE";
+                    case "Queen":
+                        return "\uD83C\uDCAD";
+                    case "Jack":
+                        return "\uD83C\uDCAB";
+                    case "ten":
+                        return "\uD83C\uDCAA";
+                    case "nine":
+                        return "\uD83C\uDCA9";
+                    case "eight":
+                        return "\uD83C\uDCA8";
+                    case "seven":
+                        return "\uD83C\uDCA7";
+                    case "six":
+                        return "\uD83C\uDCA6";
+                    case "five":
+                        return "\uD83C\uDCA5";
+                    case "four":
+                        return "\uD83C\uDCA4";
+                    case "three":
+                        return "\uD83C\uDCA3";
+                    case "two":
+                        return "\uD83C\uDCA2";
+                    case "Ace":
+                        return "\uD83C\uDCA1";
+                }
+                break;
+            case "Diamonds":
+                switch (name.text) {
+                    case "King":
+                        return "\uD83C\uDCCE";
+                    case "Queen":
+                        return "\uD83C\uDCCD";
+                    case "Jack":
+                        return "\uD83C\uDCCB";
+                    case "ten":
+                        return "\uD83C\uDCCA";
+                    case "nine":
+                        return "\uD83C\uDCC9";
+                    case "eight":
+                        return "\uD83C\uDCC8";
+                    case "seven":
+                        return "\uD83C\uDCC7";
+                    case "six":
+                        return "\uD83C\uDCC6";
+                    case "five":
+                        return "\uD83C\uDCC5";
+                    case "four":
+                        return "\uD83C\uDCC4";
+                    case "three":
+                        return "\uD83C\uDCC3";
+                    case "two":
+                        return "\uD83C\uDCC2";
+                    case "Ace":
+                        return "\uD83C\uDCC1";
+                }
+                break;
+        }
+        return "";
     } 
 }

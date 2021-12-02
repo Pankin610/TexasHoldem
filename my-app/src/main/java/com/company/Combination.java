@@ -70,7 +70,7 @@ public class Combination {
 
     public static int getBestCombination(Collection<Card> cards) {
         BitSet st = getCardsBitset(cards);
-        int max_val = 0;
+        int max_val = 1;
         for (Combination comb : allCombinations) {
             if (!comb.isSubSet(st)) {
                 continue;

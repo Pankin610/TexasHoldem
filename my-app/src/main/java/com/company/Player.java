@@ -80,6 +80,7 @@ public class Player{
     }
 
     public boolean GetInGame() {
+        in_game = (coins > 0);
         return in_game;
     }
 
@@ -91,28 +92,49 @@ public class Player{
         this.round_bet = 0;
     }
 
+    public void PrintHand() {
+        System.out.println();
+        System.out.print("Your hand: ");
+        System.out.print(FCard() + " " + SCard());
+        System.out.println();
+    }
+
     public int getRound_bet() {
         return round_bet;
     }
 
+    public void Unpass() {
+        pass = false;
+    }
+
     public int MakeBet(int min_bet) {
+        PrintHand();
         System.out.println();
-        // print your cards
-        System.out.println(name + ", you have to bet at least " + min_bet + " (" + (min_bet + getRound_bet()) + " in pot)");
+        System.out.println(name + ", you have to bet at least " + min_bet + " (" + Main.pot + " in pot)");
+        System.out.println();
         System.out.println("Your budget: " +  Coins());
+        System.out.println();
         if (Coins() < min_bet) {
             System.out.println("Unfortunately you have not enough money, the system has passed for you");
             Pass();
             return 0;
         }
         System.out.println("What's your move?");
-        System.out.println("C - Check");
+        if (Coins() > min_bet) {
+            System.out.println("C - Check for " + min_bet + " coins");
+        }
         System.out.println("P - Pass");
-        System.out.println("A - All in");
-        System.out.println("x - Bet - where x is bet's value");
+        System.out.println("A - All in for " + Coins() + " coins");
+        if (Coins() > min_bet) {
+            System.out.println("x - Bet for x coins");
+        }
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (true) {
+            if (input.isEmpty()) {
+                continue;
+            }
             if (input.charAt(0) == 'C') {
                 Bet(min_bet);
                 return  min_bet;
@@ -130,7 +152,7 @@ public class Player{
                     System.out.println(":) You're poor man! - maybe next time, try again!");
                     input = scanner.nextLine();
                 } else {
-                    System.out.println("AT LEAST " + min_bet);
+                    System.out.println("AT LEAST " + min_bet + " ;(");
                     input = scanner.nextLine();
                 }
             }
