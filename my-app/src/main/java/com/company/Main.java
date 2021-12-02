@@ -68,6 +68,28 @@ public class Main {
 
     public static void GiveMoney() {
         // TODO: Giving the pot to winner(s)
+
+        ArrayList<Player> winners = new ArrayList<>();
+        int cur_max_comb = 0;
+        for (Player player : array_of_players) {
+            ArrayList<Card> player_cards = (ArrayList<Card>)table.clone();
+            player_cards.add(player.FCard());
+            player_cards.add(player.SCard());
+
+            int best_comb = Combination.getBestCombination(player_cards);
+            if (best_comb > cur_max_comb) {
+                cur_max_comb = best_comb;
+                winners.clear();
+            }
+            if (best_comb == cur_max_comb) {
+                winners.add(player);
+            }            
+        }
+
+        for (Player player : winners) {
+            player.Win(pot / winners.size());
+        }
+
         pot = 0;
     }
 

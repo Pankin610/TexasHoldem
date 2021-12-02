@@ -9,13 +9,19 @@ import java.util.List;
 import java.util.BitSet;
 
 public class Combination {
-    BitSet cards_mask = new BitSet(52);
+    BitSet cards_mask;
     int value;
 
-    private Combination(Collection<Card> cards, int value) {
+    static BitSet getCardsBitset(Collection<Card> cards) {
+        BitSet mask = new BitSet(52);
         for (Card card : cards) {
-            cards_mask.set(card.index());
+            mask.set(card.index());
         }
+        return mask;
+    }
+
+    private Combination(Collection<Card> cards, int value) {
+        cards_mask = getCardsBitset(cards);
         this.value = value;
     }
 
@@ -39,6 +45,17 @@ public class Combination {
         for (Card card : Card.allCards) {
             addCombination(Arrays.asList(card, card));
         }
+    }
 
+    public static int getBestCombination(Collection<Card> cards) {
+        BitSet st = getCardsBitset(cards);
+        int max_val = 0;
+        for (Combination comb : allCombinations) {
+            if (!comb.isSubSet(st)) {
+                continue;
+            }
+            max_val = Math.max(max_val, comb.value);
+        }
+        return max_val;
     }
 }
