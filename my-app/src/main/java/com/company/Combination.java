@@ -29,9 +29,8 @@ public class Combination {
 
     static int max_val = 1;
     static public ArrayList<Combination> allCombinations = new ArrayList<>();
-    static void addCombination(Collection<Card> cards) {
-        allCombinations.add(new Combination(cards, max_val));
-        max_val += 1;
+    static void addCombination(Collection<Card> cards, int value) {
+        allCombinations.add(new Combination(cards, max_val + value));
     }
 
     static {
@@ -39,12 +38,9 @@ public class Combination {
 
         // strong card
         for (Card card : Card.allCards) {
-            addCombination(Arrays.asList(card));
+            addCombination(Arrays.asList(card), card.name.value);
         }
         // pair
-//        for (Card card : Card.allCards) {
-//            addCombination(Arrays.asList(card, card));
-//        }
         max_val = 1000000;
         for (Card card1 : Card.allCards) {
             for (Card card2 : Card.allCards) {
@@ -52,19 +48,11 @@ public class Combination {
                     continue;
                 }
                 if (card1.name.equals(card2.name) && !card1.equals(card2)) {
-                    addCombination(Arrays.asList(card1, card2));
+                    addCombination(Arrays.asList(card1, card2), card1.name.value);
                 }
             }
         }
         // two pair
-//        for (Card card1 : Card.allCards) {
-//            for (Card card2 : Card.allCards) {
-//                if (card1.equals(card2)) {
-//                    continue;
-//                }
-//                addCombination(Arrays.asList(card1, card1, card2, card2));
-//            }
-//        }
         max_val = 2000000;
         for (Card card1 : Card.allCards) {
             for (Card card2 : Card.allCards) {
@@ -82,7 +70,7 @@ public class Combination {
                         if (!card1.equals(card2) && card1.name.equals(card2.name)) {
                             if (!card3.equals(card4) && card3.name.equals(card4.name)) {
                                 if (!card1.name.equals(card3.name)) {
-                                    addCombination(Arrays.asList(card1, card2, card3, card4));
+                                    addCombination(Arrays.asList(card1, card2, card3, card4),(card3.name.value * 100 + card1.name.value));
                                 }
                             }
                         }
@@ -103,7 +91,7 @@ public class Combination {
                     }
                     if (card1.name.equals(card2.name) && card2.name.equals(card3.name)) {
                         if (!card1.equals(card2) && !card1.equals(card3) && !card2.equals(card3)) {
-                            addCombination(Arrays.asList(card1, card2, card3));
+                            addCombination(Arrays.asList(card1, card2, card3), card1.name.value);
                         }
                     }
                 }
@@ -139,7 +127,7 @@ public class Combination {
                                             suitesss.add(card4.suit);
                                             suitesss.add(card5.suit);
                                             if (suitesss.size() > 1) {
-                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card1.name.value);
                                             }
                                         }
                                     }
@@ -184,7 +172,7 @@ public class Combination {
                             suiteess.add(card5.suit);
 
                             if (sett.size() == 5 && suiteess.size() == 5) {
-                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), (card5.name.value * 10000 + card4.name.value * 1000 + card3.name.value * 100 + card2.name.value * 10 + card1.name.value));
                             }
                         }
                     }
@@ -223,7 +211,7 @@ public class Combination {
 
                             if (card1.name.equals(card2.name) && card2.name.equals(card3.name)) {
                                 if (card4.name.equals(card5.name)) {
-                                    Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                    Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), (card1.name.value * 100 + card2.name.value));
                                 }
                             }
                         }
@@ -263,7 +251,7 @@ public class Combination {
                         strings.add(card4.name.text);
 
                         if (strings.size() == 1) {
-                            Combination.addCombination(Arrays.asList(card1, card2, card3, card4));
+                            Combination.addCombination(Arrays.asList(card1, card2, card3, card4), card1.name.value);
                         }
                     }
                 }
@@ -299,7 +287,7 @@ public class Combination {
                                             suitesss.add(card4.suit);
                                             suitesss.add(card5.suit);
                                             if (suitesss.size() == 1) {
-                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5));
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card1.name.value);
                                             }
                                         }
                                     }
