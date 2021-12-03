@@ -116,7 +116,7 @@ public class Combination {
                             if (card5.name.value < card4.name.value) {
                                 continue;
                             }
-                            if (card1.name.value + 1 == card2.name.value) {
+                            if (card1.name.value + 1 == card2.name.value || card1.name.value == card2.name.value + 11) {
                                 if (card2.name.value + 1 == card3.name.value) {
                                     if (card3.name.value + 1 == card4.name.value) {
                                         if (card4.name.value + 1 == card5.name.value) {
@@ -127,7 +127,7 @@ public class Combination {
                                             suitesss.add(card4.suit);
                                             suitesss.add(card5.suit);
                                             if (suitesss.size() > 1) {
-                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card1.name.value);
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card5.name.value);
                                             }
                                         }
                                     }
@@ -276,7 +276,7 @@ public class Combination {
                             if (card5.name.value < card4.name.value) {
                                 continue;
                             }
-                            if (card1.name.value + 1 == card2.name.value) {
+                            if (card1.name.value + 1 == card2.name.value || card1.name.value == card2.name.value + 11) {
                                 if (card2.name.value + 1 == card3.name.value) {
                                     if (card3.name.value + 1 == card4.name.value) {
                                         if (card4.name.value + 1 == card5.name.value) {
@@ -287,7 +287,7 @@ public class Combination {
                                             suitesss.add(card4.suit);
                                             suitesss.add(card5.suit);
                                             if (suitesss.size() == 1) {
-                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card1.name.value);
+                                                Combination.addCombination(Arrays.asList(card1, card2, card3, card4, card5), card5.name.value);
                                             }
                                         }
                                     }
