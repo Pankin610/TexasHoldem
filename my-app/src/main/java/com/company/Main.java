@@ -196,7 +196,7 @@ public class Main {
         }
 
         System.out.print("The round has ended! Here ");
-        if (winners.size() > 1) {
+        if (winners.size() == 1) {
             System.out.println("is the winner:");
         } else {
             System.out.println("are the winners:");
@@ -214,7 +214,6 @@ public class Main {
         System.out.println();
         PrintTable();
         System.out.println();
-        System.out.println("Your hands:");
         for (Player player : winners) {
             System.out.print(player.Name() + ": ");
             player.PrintHand();
