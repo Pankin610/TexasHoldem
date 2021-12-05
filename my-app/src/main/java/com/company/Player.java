@@ -130,7 +130,7 @@ public class Player{
         System.out.println("P - Pass");
         System.out.println("A - All in for $" + Coins());
         if (Coins() > min_bet) {
-            System.out.println("x - Raise to $x");
+            System.out.println("x - Raise for $x");
         }
         System.out.println();
         Scanner scanner = new Scanner(System.in);
