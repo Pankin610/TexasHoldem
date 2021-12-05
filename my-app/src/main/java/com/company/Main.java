@@ -38,15 +38,15 @@ public class Main {
             if (!made_move[it] && player.getRound_bet() == 0) {
                 System.out.println("hasn't moved yet");
             } else if (!made_move[it] && player.getRound_bet() == 10) {
-                System.out.println("10 coins SB");
+                System.out.println("$10 SB");
             } else if (!made_move[it] && player.getRound_bet() == 20) {
-                System.out.println("20 coins BB");
+                System.out.println("$20 BB");
             } else if (player.IsPass()) {
                 System.out.println("Pass");
             } else if (player.Coins() == 0) {
-                System.out.println("All-In for " + player.getRound_bet() + " coins");
+                System.out.println("All-In for $" + player.getRound_bet());
             } else {
-                System.out.println(player.getRound_bet() + " coins");
+                System.out.println("$" + player.getRound_bet());
             }
         }
     }
@@ -195,12 +195,17 @@ public class Main {
             System.out.println();
         }
 
-        System.out.println("The round has ended! Here are the winners:");
+        System.out.print("The round has ended! Here ");
+        if (winners.size() > 1) {
+            System.out.println("is the winner:");
+        } else {
+            System.out.println("are the winners:");
+        }
         for (Player player : winners) {
             System.out.print(player.Name() + " ");
         }
         System.out.println("");
-        System.out.println("Each wins " + pot / winners.size() + " coins.");
+        System.out.println("The prize =  $" + pot / winners.size());
  
         for (Player player : winners) {
             player.Win(pot / winners.size());
@@ -263,7 +268,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         EmptyScreen();
-	    System.out.println("Welcome to Texas Hold'em Game");
+	    System.out.println("\uD83C\uDCD1 \uD83C\uDCB1 Welcome to Texas Hold'em Game \uD83C\uDCA1 \uD83C\uDCC1");
         System.out.println();
         System.out.print("Insert the number of players: ");
 
